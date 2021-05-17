@@ -6,22 +6,21 @@ import io.github.arsonistcook.personapi.entity.Person;
 import io.github.arsonistcook.personapi.exception.PersonNotFoundException;
 import io.github.arsonistcook.personapi.mapper.PersonMapper;
 import io.github.arsonistcook.personapi.sepository.PersonRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Data
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
-    private PersonRepository personRepository;
-    private PersonMapper personMapper = PersonMapper.INSTANCE;
+    private final PersonRepository personRepository;
+    private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
 
     public ResponseMessageDTO create(PersonDTO personDTO) {
         Person personToSave = personMapper.toModel(personDTO);

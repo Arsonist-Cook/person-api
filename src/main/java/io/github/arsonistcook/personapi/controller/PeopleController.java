@@ -2,28 +2,24 @@ package io.github.arsonistcook.personapi.controller;
 
 import io.github.arsonistcook.personapi.dto.ResponseMessageDTO;
 import io.github.arsonistcook.personapi.dto.request.PersonDTO;
-import io.github.arsonistcook.personapi.entity.Person;
 import io.github.arsonistcook.personapi.exception.PersonNotFoundException;
-import io.github.arsonistcook.personapi.sepository.PersonRepository;
 import io.github.arsonistcook.personapi.service.PersonService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 
+@Data
 @RestController
 @RequestMapping("/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PeopleController {
 
-    private PersonService personService;
-
-    @Autowired
-    public PeopleController(PersonService personService) {
-        this.personService = personService;
-    }
+    private final PersonService personService;
 
     @GetMapping
     public List<PersonDTO> getPeople() {
