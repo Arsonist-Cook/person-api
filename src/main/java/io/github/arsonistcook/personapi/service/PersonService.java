@@ -26,9 +26,7 @@ public class PersonService {
     public ResponseMessageDTO create(PersonDTO personDTO) {
         Person personToSave = personMapper.toModel(personDTO);
         Person savedPerson = personRepository.save(personToSave);
-        return ResponseMessageDTO.builder()
-                .message("Saved Person with Id: " + savedPerson.getId())
-                .build();
+        return createResponseMessage(savedPerson.getId(), "Saved Person with Id: ");
     }
 
     public List<PersonDTO> findAll() {
@@ -49,9 +47,22 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
+    public ResponseMessageDTO update(long id, PersonDTO personDTO) throws PersonNotFoundException {
+        verifyIfExists(id);
+        Person personToUpdate = personMapper.toModel(personDTO);
+        Person updatedPerson = personRepository.save(personToUpdate);
+        return createResponseMessage(updatedPerson.getId(), "Updated Person with Id: ");
+    }
+
     private Person verifyIfExists(long id) throws PersonNotFoundException {
         return personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
+    }
+
+    private ResponseMessageDTO createResponseMessage(long id, String message) {
+        return ResponseMessageDTO.builder()
+                .message(message + id)
+                .build();
     }
 
 }
