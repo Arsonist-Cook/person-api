@@ -5,7 +5,7 @@ import io.github.arsonistcook.personapi.dto.request.PersonDTO;
 import io.github.arsonistcook.personapi.entity.Person;
 import io.github.arsonistcook.personapi.exception.PersonNotFoundException;
 import io.github.arsonistcook.personapi.mapper.PersonMapper;
-import io.github.arsonistcook.personapi.sepository.PersonRepository;
+import io.github.arsonistcook.personapi.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
